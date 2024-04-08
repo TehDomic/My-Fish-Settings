@@ -1,1 +1,1 @@
-# My-Fish-Settings
+# My Fish Settings
