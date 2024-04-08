@@ -1,1 +1,1 @@
-# My-FishShell-Settings
+# My-Fish-Settings
