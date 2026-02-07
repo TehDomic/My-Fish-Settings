@@ -80,27 +80,6 @@ apply_config() {
     echo "  - Theme: Just a Touch"
 }
 
-# Function to set Fish as default shell (non-interactive)
-set_default_shell() {
-    echo ""
-    echo "Setting Fish as default shell..."
-    
-    FISH_PATH=$(which fish)
-    
-    # Add fish to /etc/shells if not already there
-    if ! grep -q "$FISH_PATH" /etc/shells 2>/dev/null; then
-        echo "Adding Fish to /etc/shells (requires sudo)..."
-        echo "$FISH_PATH" | sudo tee -a /etc/shells > /dev/null
-    fi
-    
-    # Change default shell
-    echo "Changing default shell to Fish (requires sudo)..."
-    sudo chsh -s "$FISH_PATH" "$USER"
-    
-    echo -e "${GREEN}✓${NC} Default shell set to Fish"
-    echo "  Please log out and log back in for changes to take effect"
-}
-
 # Main execution
 main() {
     if ! check_fish; then
@@ -108,14 +87,16 @@ main() {
     fi
     
     apply_config
-    set_default_shell
     
     echo ""
     echo "==================================="
     echo -e "${GREEN}Setup complete!${NC}"
     echo "==================================="
     echo ""
-    echo "You can start Fish by running: fish"
+    echo "To set Fish as your default shell, run:"
+    echo "  chsh -s \$(which fish)"
+    echo ""
+    echo "You can start Fish now by running: fish"
 }
 
 main
