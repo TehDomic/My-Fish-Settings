@@ -35,15 +35,21 @@ install_fish() {
     
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         if command -v apt &> /dev/null; then
-            sudo -v < /dev/tty
-            sudo apt update
-            sudo apt install -y fish
+            echo "Requesting sudo access..."
+            sudo -k  # Clear any cached credentials
+            sudo -v < /dev/tty  # Request password from terminal
+            sudo apt update < /dev/tty
+            sudo apt install -y fish < /dev/tty
         elif command -v dnf &> /dev/null; then
+            echo "Requesting sudo access..."
+            sudo -k
             sudo -v < /dev/tty
-            sudo dnf install -y fish
+            sudo dnf install -y fish < /dev/tty
         elif command -v pacman &> /dev/null; then
+            echo "Requesting sudo access..."
+            sudo -k
             sudo -v < /dev/tty
-            sudo pacman -S --noconfirm fish
+            sudo pacman -S --noconfirm fish < /dev/tty
         else
             echo -e "${RED}✗${NC} Unsupported package manager. Please install Fish manually."
             exit 1
@@ -65,7 +71,7 @@ install_fish() {
     } else {
         echo -e "${RED}✗${NC} Fish installation failed"
         exit 1
-    fi
+    }
 }
 
 # Function to apply Fish configuration
