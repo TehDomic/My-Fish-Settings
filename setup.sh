@@ -68,10 +68,10 @@ install_fish() {
     
     if check_fish; then
         echo -e "${GREEN}✓${NC} Fish shell installed successfully"
-    } else {
+    else
         echo -e "${RED}✗${NC} Fish installation failed"
         exit 1
-    }
+    fi
 }
 
 # Function to apply Fish configuration
@@ -103,7 +103,7 @@ main() {
     echo "==================================="
     echo ""
     echo "To set Fish as your default shell, run:"
-    echo "  chsh -s \$(which fish)"
+    echo "  chsh -s \\$(which fish)"
     echo ""
     echo "You can start Fish now by running: fish"
 }
