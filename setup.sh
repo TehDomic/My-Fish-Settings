@@ -35,11 +35,14 @@ install_fish() {
     
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         if command -v apt &> /dev/null; then
+            sudo -v < /dev/tty
             sudo apt update
             sudo apt install -y fish
         elif command -v dnf &> /dev/null; then
+            sudo -v < /dev/tty
             sudo dnf install -y fish
         elif command -v pacman &> /dev/null; then
+            sudo -v < /dev/tty
             sudo pacman -S --noconfirm fish
         else
             echo -e "${RED}✗${NC} Unsupported package manager. Please install Fish manually."
@@ -59,7 +62,7 @@ install_fish() {
     
     if check_fish; then
         echo -e "${GREEN}✓${NC} Fish shell installed successfully"
-    else
+    } else {
         echo -e "${RED}✗${NC} Fish installation failed"
         exit 1
     fi
